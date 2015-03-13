@@ -1,0 +1,38 @@
+<h1>Listing questions</h1>
+
+<table style="width:85%">
+  <thead>
+    <tr align="center">
+      <th>User</th>
+      <th>Title</th>
+      <th>Content</th>
+      <th>Description</th>
+      <th>Vote</th>
+      <th>Unvote</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @questions.each do |question| %>
+      <tr>
+        <td><%= question.user.name %></td>
+        <td><%= question.Title %></td>
+        <td><%= question.Content %></td>
+        <td><%= question.Description %></td>
+        <td><%= question.Vote %></td>
+        <td><%= question.Unvote %></td>
+        <% if current_user.present? && current_user.id == question.user.id %>
+        <td><%= link_to 'Show', question %></td>
+        <td><%= link_to 'Edit', edit_question_path(question) %></td>
+        <td><%= link_to 'Destroy', question, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+         <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+<% if logged_in? %>
+<%= link_to 'New Question', new_question_path %>
+<% end %>

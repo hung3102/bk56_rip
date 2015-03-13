@@ -1,0 +1,38 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @question.user.name if @question.user %>
+</p>
+<p>
+  <strong>Title:</strong>
+  <%= @question.Title %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @question.Description %>
+</p>
+
+<p>
+  <strong>Vote:</strong>
+  <%= @question.Vote %>
+</p>
+
+<p>
+  <strong>Unvote:</strong>
+  <%= @question.Unvote %>
+</p>
+
+<p>
+  <strong>Content:</strong>
+  <%= @question.Content %>
+</p>
+
+<%= link_to 'Edit', edit_question_path(@question) %> |
+<%= link_to 'Back', questions_path %>
+</br>
+<p>
+<%= link_to 'Create Question', new_question_path %> |
+<%= link_to 'List Question', listquestion_path %>
+</p>
