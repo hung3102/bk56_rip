@@ -1,11 +1,11 @@
 class CreateQuestions < ActiveRecord::Migration
   def change
     create_table :questions do |t|
-      t.string :Title
-      t.string :Description
-      t.integer :Vote
-      t.integer :Unvote
-      t.text :Content
+      t.string :title
+      t.string :description
+      t.integer :vote
+      t.integer :unVote
+      t.text :content
       t.references :user, index: true
 
       t.timestamps

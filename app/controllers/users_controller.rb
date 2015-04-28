@@ -27,6 +27,7 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(user_params)
+    @user.date = Time.now
       if @user.save
         log_in @user
         flash[:success] = "Welcome to the language Q&A!"

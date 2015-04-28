@@ -31,7 +31,9 @@
 </p>
 </br>
 <p>
-<%= link_to 'Create Question', new_question_path %> |
+<% if current_user.present? && current_user.id == @user.id %>
+<%= link_to 'Create Question', new_question_path %> | 
+  <% end %>
 <%= link_to 'List Question', listquestion_path %>
 </p>
 

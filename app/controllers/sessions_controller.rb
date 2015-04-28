@@ -1,4 +1,5 @@
 class SessionsController < ApplicationController
+  
    def new
   end
    def create
@@ -6,7 +7,7 @@ class SessionsController < ApplicationController
     if @user && @user.authenticate(params[:session][:password])
       flash[:success] = "Welcome to the language Q&A!"
       log_in @user
-      redirect_to @user
+      redirect_back_or_default(root_url)
     else
       flash[:danger] = 'Invalid email/password combination' # Not quite right!
       render 'new'
@@ -18,9 +19,4 @@ class SessionsController < ApplicationController
     redirect_to root_url
   end
   
-   # Logs out the current user.
-  def log_out
-    session.delete(:user_id)
-    @current_user = nil
-  end
 end

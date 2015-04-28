@@ -6,33 +6,66 @@
 </p>
 <p>
   <strong>Title:</strong>
-  <%= @question.Title %>
+  <%= @question.title %>
 </p>
 
 <p>
   <strong>Description:</strong>
-  <%= @question.Description %>
+  <%= @question.description %>
 </p>
 
 <p>
   <strong>Vote:</strong>
-  <%= @question.Vote %>
+  <%= @question.vote %>
 </p>
 
 <p>
   <strong>Unvote:</strong>
-  <%= @question.Unvote %>
+  <%= @question.unVote %>
 </p>
 
 <p>
   <strong>Content:</strong>
-  <%= @question.Content %>
+  <%= @question.content %>
 </p>
 
-<%= link_to 'Edit', edit_question_path(@question) %> |
-<%= link_to 'Back', questions_path %>
+<% if current_user.present? && current_user.id == @question.user.id %>
+<%= link_to 'Edit', edit_question_path(@question) %> | 
+<%= link_to 'Destroy', @question, method: :delete, data: { confirm: 'Are you sure?' } %>
+<% end %>
+<br></br>
+
+<div>
+  <b><font color = "blue">Have <%= @question.answers.count %> answer(s): </font></b>
+<hr>
+  <% if @question.answers.count > 0 %>
+  <% @answers = @question.answers %>
+  <% @answers.each do |answer| %>
+      <strong>Title Answer:</strong> <%= answer.title %>
+  </br>
+      <strong>Answer:</strong> <%= answer.content %>
+<% if current_user.present? && current_user.id == answer.user.id %>
+<br></br>
+<%= link_to 'Edit', edit_answer_path(answer) %> | 
+<%= link_to 'Destroy', answer, method: :delete, data: { confirm: 'Are you sure?' } %>
+  <% end %>
+  <hr>
+  <% end %>
+  <% end %>
+</div>
+
+<div class = "leave a comment">
+    Leave a comment: 
+  <p style="color: red", align="center"><b><%= flash[:error] %> </b></p>
+<p>
+  <%= render :partial => 'answers/form', :question => @question, :answer => @answer = Answer.new %>
+</p>
+</div>
+
 </br>
 <p>
-<%= link_to 'Create Question', new_question_path %> |
+<% if current_user.present? && current_user.id == @question.user.id %>
+<%= link_to 'Create Question', new_question_path %> | 
+<% end %>
 <%= link_to 'List Question', listquestion_path %>
 </p>

@@ -16,14 +16,14 @@
   <tbody>
     <% @questions.each do |question| %>
       <tr>
-        <td><%= question.user.name %></td>
-        <td><%= question.Title %></td>
-        <td><%= question.Content %></td>
-        <td><%= question.Description %></td>
-        <td><%= question.Vote %></td>
-        <td><%= question.Unvote %></td>
-        <% if current_user.present? && current_user.id == question.user.id %>
+        <td><%= link_to question.user.name, question.user %></td>
+        <td><%= link_to question.title, question %></td>
+        <td><%= question.content %></td>
+        <td><%= question.description %></td>
+        <td><%= question.vote %></td>
+        <td><%= question.unVote %></td>
         <td><%= link_to 'Show', question %></td>
+        <% if current_user.present? && current_user.id == question.user.id %>
         <td><%= link_to 'Edit', edit_question_path(question) %></td>
         <td><%= link_to 'Destroy', question, method: :delete, data: { confirm: 'Are you sure?' } %></td>
          <% end %>
